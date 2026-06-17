@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Tannu ❤️</title>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<style>
+body{
+margin:0;overflow:hidden;font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb);
+height:100vh;display:flex;justify-content:center;align-items:center;
+}
+.card{
+background:rgba(255,255,255,.95);
+padding:25px;border-radius:25px;text-align:center;
+max-width:650px;z-index:10;box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+h1{margin-top:0}
+.cake{font-size:120px;transition:.6s}
+button{
+padding:14px 28px;border:none;border-radius:30px;
+background:#ff4d6d;color:white;font-size:18px;cursor:pointer;
+}
+#message{display:none;animation:fade 2s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.balloon{position:absolute;bottom:-120px;font-size:55px;animation:floatUp linear infinite}
+@keyframes floatUp{to{transform:translateY(-130vh)}}
+
+.sparkle{
+position:absolute;width:4px;height:4px;background:white;border-radius:50%;
+animation:twinkle 2s infinite;
+}
+@keyframes twinkle{50%{opacity:.2}}
+
+.cat{
+position:absolute;
+font-size:60px;
+animation:catFloat 10s linear infinite;
+}
+@keyframes catFloat{
+0%{transform:translateX(-10vw)}
+100%{transform:translateX(110vw)}
+}
+
+#giftBox{font-size:90px;animation:bounce 1.5s infinite}
+@keyframes bounce{
+50%{transform:translateY(-12px)}
+}
+
+.glow{
+color:#ff4d6d;
+text-shadow:0 0 10px #ff4d6d,0 0 20px #ff4d6d;
+animation:pulse 2s infinite;
+}
+@keyframes pulse{50%{opacity:.7}}
+
+#mainContent{display:none}
+
+#introScreen{
+position:fixed;inset:0;overflow:hidden;
+background:radial-gradient(circle at center,#13254d,#020510 70%,#000);
+z-index:99999;
+display:flex;justify-content:center;align-items:center;
+}
+#introText{
+color:white;font-size:clamp(30px,7vw,58px);
+text-align:center;text-shadow:0 0 20px white;
+animation:appear 2s ease;
+}
+.firework{
+position:absolute;
+width:8px;height:8px;border-radius:50%;
+}
+@keyframes explode{
+0%{transform:translate(0,0);opacity:1}
+100%{transform:translate(var(--x),var(--y));opacity:0}
+}
+@keyframes appear{
+from{opacity:0}
+to{opacity:1}
+}
+</style>
+</head>
+<body>
+<div id="introScreen">
+<div id="introText">🌌 Happy Birthday Tannu 🌌</div>
+</div>
+
+
+<div id="giftScreen" class="card">
+<div id="giftBox">🎁</div>
+<h2>A Special Birthday Surprise For Tannu</h2>
+<button onclick="openGift()">Open Gift 🎁</button>
+</div>
+
+<div id="mainContent" class="card">
+<h1 class="glow">🎉 Happy Birthday Tannu 🎉</h1>
+<div id="cake" class="cake">🎂</div>
+<button id="cakeBtn" onclick="celebrate()">Cut The Cake 🎂</button>
+
+<div id="message">
+<h2>💖 Dear Tannu 💖</h2>
+<p>
+May your birthday be filled with happiness, laughter, success,
+beautiful memories and endless smiles. 🌸✨<br><br>
+Thank you for being such an amazing friend.
+May all your dreams come true and may the coming year bring lots of joy and positivity.
+</p>
+<h3>❤️ From Piyush ❤️</h3>
+</div>
+
+<audio id="music" controls>
+<source src="birthday-music.mp3" type="audio/mpeg">
+</audio>
+</div>
+
+<script>
+for(let i=0;i<40;i++){
+ let b=document.createElement('div');
+ b.className='balloon';
+ b.innerHTML='🎈';
+ b.style.left=Math.random()*100+'vw';
+ b.style.animationDuration=(8+Math.random()*8)+'s';
+ document.body.appendChild(b);
+}
+
+for(let i=0;i<100;i++){
+ let s=document.createElement('div');
+ s.className='sparkle';
+ s.style.left=Math.random()*100+'vw';
+ s.style.top=Math.random()*100+'vh';
+ s.style.animationDelay=Math.random()*2+'s';
+ document.body.appendChild(s);
+}
+
+for(let i=0;i<6;i++){
+ let c=document.createElement('div');
+ c.className='cat';
+ c.innerHTML='🐱🎉';
+ c.style.top=(10+i*12)+'vh';
+ c.style.animationDelay=(i*2)+'s';
+ document.body.appendChild(c);
+}
+
+function openGift(){
+ document.getElementById('giftScreen').style.display='none';
+ document.getElementById('mainContent').style.display='block';
+}
+
+function fireworks(){
+ let end=Date.now()+5000;
+ (function frame(){
+  confetti({particleCount:8,spread:70,origin:{x:0}});
+  confetti({particleCount:8,spread:70,origin:{x:1}});
+  if(Date.now()<end) requestAnimationFrame(frame);
+ })();
+}
+
+function heartRain(){
+ for(let i=0;i<30;i++){
+   let h=document.createElement('div');
+   h.innerHTML='💖';
+   h.style.position='absolute';
+   h.style.left=Math.random()*100+'vw';
+   h.style.top='-20px';
+   h.style.fontSize='30px';
+   h.style.transition='all 4s linear';
+   document.body.appendChild(h);
+   setTimeout(()=>{
+      h.style.top='110vh';
+   },50);
+ }
+}
+
+function celebrate(){
+ document.getElementById('cake').innerHTML='🍰';
+ document.getElementById('message').style.display='block';
+ document.getElementById('cakeBtn').style.display='none';
+
+ document.getElementById('music').play().catch(()=>{});
+
+ confetti({particleCount:250,spread:120,origin:{y:0.6}});
+ fireworks();
+ heartRain();
+}
+</script>
+
+<script>
+function burst(x,y){
+ for(let i=0;i<45;i++){
+   const p=document.createElement('div');
+   p.className='firework';
+   p.style.left=x+'px';
+   p.style.top=y+'px';
+
+   const angle=(Math.PI*2*i)/45;
+   const dist=80+Math.random()*120;
+
+   p.style.setProperty('--x',Math.cos(angle)*dist+'px');
+   p.style.setProperty('--y',Math.sin(angle)*dist+'px');
+
+   p.style.background=
+     `hsl(${Math.random()*360},100%,70%)`;
+
+   p.style.animation='explode 1.2s ease-out forwards';
+
+   document.getElementById('introScreen').appendChild(p);
+
+   setTimeout(()=>p.remove(),1200);
+ }
+}
+
+function startFireworks(){
+ const intro=document.getElementById('introScreen');
+ let count=0;
+
+ const timer=setInterval(()=>{
+   burst(
+    Math.random()*window.innerWidth,
+    100+Math.random()*300
+   );
+   count++;
+
+   if(count>10){
+      clearInterval(timer);
+      setTimeout(()=>{
+         intro.style.transition='opacity 1s';
+         intro.style.opacity='0';
+         setTimeout(()=>intro.remove(),1000);
+      },800);
+   }
+ },400);
+}
+window.addEventListener('load',startFireworks);
+</script>
+</body>
+</html>
