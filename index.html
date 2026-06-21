@@ -81,6 +81,15 @@ width:8px;height:8px;border-radius:50%;
 from{opacity:0}
 to{opacity:1}
 }
+
+#endCover{position:fixed;inset:0;display:none;justify-content:center;align-items:center;
+background:linear-gradient(135deg,#12001f,#3d0b5e,#ff5ea8);z-index:999999;color:white;text-align:center;padding:24px}
+.endCard{max-width:750px;background:rgba(255,255,255,.08);backdrop-filter:blur(10px);padding:30px;border-radius:30px}
+.endTitle{font-size:clamp(32px,7vw,60px);margin-bottom:10px}
+.typeLine{min-height:80px;font-size:20px;line-height:1.6}
+.stars{font-size:32px;animation:pulse 2s infinite}
+#showEndBtn{display:none;margin-top:18px}
+
 </style>
 </head>
 <body>
@@ -234,6 +243,46 @@ function startFireworks(){
  },400);
 }
 window.addEventListener('load',startFireworks);
+</script>
+
+<div id="endCover">
+ <div class="endCard">
+   <div class="stars">✨🌙💖✨</div>
+   <div class="endTitle">The End... But More Smiles Ahead 🌸</div>
+   <div id="typeMessage" class="typeLine"></div>
+   <h3>❤️ Once Again — Happy Birthday Tannu ❤️</h3>
+ </div>
+</div>
+
+<script>
+const endLines=[
+"May this year bring new memories, confidence and happiness.",
+"Keep smiling and keep becoming more of yourself.",
+"This little page ends here… but good moments continue ✨"
+];
+function showEndCover(){
+ document.getElementById('endCover').style.display='flex';
+ const box=document.getElementById('typeMessage');
+ box.innerHTML='';
+ let i=0;
+ function next(){
+   if(i>=endLines.length) return;
+   const p=document.createElement('div');
+   box.appendChild(p);
+   let j=0;
+   const t=setInterval(()=>{
+      p.textContent=endLines[i].slice(0,j++);
+      if(j>endLines[i].length){clearInterval(t);i++;setTimeout(next,700)}
+   },35)
+ }
+ next();
+ confetti({particleCount:350,spread:180,origin:{y:0.5}});
+}
+const oldCelebrate = celebrate;
+celebrate=function(){
+ oldCelebrate();
+ setTimeout(showEndCover,9000);
+}
 </script>
 </body>
 </html>
